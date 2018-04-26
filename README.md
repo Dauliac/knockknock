@@ -8,4 +8,8 @@
 * [ ] camera software
 * [ ] camera hardware
 * [ ] interface web
-* [ ] video over http
+		- video
+		- 
+* [ ] 
+* [ ] video over http mono-directionnel
+* [ ] audio bi-directionnel

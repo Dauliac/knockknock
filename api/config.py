@@ -1,0 +1,5 @@
+DATABASE_HOST = 'localhost'
+DATABASE_USER = 'root'
+DATABASE_PASSWORD = 'root'
+DATABASE_NAME = 'knock_knock'
+SECRET_KEY = 'some random string w17h n|_|m83r5 !'

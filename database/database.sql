@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS knock_knock;
+use knock_knock;
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users(
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(200) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET = utf8;

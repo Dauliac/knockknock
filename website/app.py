@@ -25,15 +25,21 @@ connection = pymysql.connect(host=app.config.get('DB_HOST'),
 # Objects
 class User(object):
     def __init__(self, id=None, username=None, password=None, admin=False):
-        self._id = id
-        self._username = username
-        self._password = password
-        self._admin = admin
+        if id:
+            self._id = id
+        elif username and password:
+            self._username = username
+            self._password = password
+            self._admin = admin
+            self._insert()
+        else:
+            print('error empty user create one with new username and \
+                   password or instance existing by id')
 
     def __str__(self):
-        return "User(id='%s', username='%s', admin='%s' )" % (self.id, self.username, self.admin)
+        return "User(id='%s', username='%s', admin='%s' )" % (self._id, self._username, self._admin)
 
-    def insert(self):
+    def _insert(self):
         if self._username and self._password:
             try:
                 with connection.cursor() as cursor:
@@ -52,13 +58,26 @@ class User(object):
                 connection.close()
 
     @property
+    def id(self, id):
+        if self._id:
+            return self._id
+        try:
+            with connection.cursor() as cursor:
+                sql = "SELECT username FROM users WHERE user_id='%s'"
+                cursor.execute(sql, self._id)
+                self._username = cursor.fetchone()
+                return self._username
+        finally:
+            connection.close()
+
+    @property
     def username(self):
         if self._username:
             return self._username
         try:
             with connection.cursor() as cursor:
                 sql = "SELECT username FROM users WHERE user_id='%s'"
-                cursor.execute(sql, self._id)
+                cursor.execute(sql, self.id)
                 self._username = cursor.fetchone()
                 return self._username
         finally:
@@ -69,7 +88,7 @@ class User(object):
         try:
             with connection.cursor() as cursor:
                 sql = "UPDATE users SET username='%s' WHERE user_id='%s'"
-                cursor.execute(sql, (username, self._id))
+                cursor.execute(sql, (username, self.id))
             connection.commit()
             self._username = username
         finally:
@@ -82,7 +101,7 @@ class User(object):
         try:
             with connection.cursor() as cursor:
                 sql = "SELECT password FROM users WHERE user_id='%s'"
-                cursor.execute(sql, (self._id))
+                cursor.execute(sql, (self.id))
                 self._password = cursor.fetchone()
                 return self._password
         finally:
@@ -94,7 +113,7 @@ class User(object):
             with connection.cursor() as cursor:
                 # Create a new record
                 sql = "UPDATE users SET password='%s' WHERE user_id='%s'"
-                cursor.execute(sql, (password, self._id))
+                cursor.execute(sql, (password, self.id))
             connection.commit()
             self._password = password
         finally:
@@ -107,7 +126,7 @@ class User(object):
         try:
             with connection.cursor() as cursor:
                 sql = "SELECT admin FROM users WHERE user_id='%s'"
-                cursor.execute(sql, self._id)
+                cursor.execute(sql, self.id)
                 self._admin = cursor.fetchone()
                 return self._admin
         finally:
@@ -119,7 +138,7 @@ class User(object):
             with connection.cursor() as cursor:
                 # Create a new record
                 sql = "UPDATE USER SET admin='%s' WHERE user_id='%s'"
-                cursor.execute(sql, (admin, self._id))
+                cursor.execute(sql, (admin, self.id))
             connection.commit()
             self._admin = admin
         finally:

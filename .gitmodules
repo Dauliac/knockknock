@@ -1,0 +1,6 @@
+[submodule "website/static/fonts/Pacifico"]
+	path = website/static/fonts/Pacifico
+	url = https://github.com/googlefonts/Pacifico.git
+[submodule "website/static/fonts/material-design-icons"]
+	path = website/static/fonts/material-design-icons
+	url = https://github.com/google/material-design-icons.git

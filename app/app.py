@@ -20,8 +20,6 @@ connection = pymysql.connect(host=app.config.get('DB_HOST'),
                              db='DB',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
-
-
 # Objects
 class User(object):
     def __init__(self, id=None, username=None, password=None, admin=False):

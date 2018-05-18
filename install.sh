@@ -29,7 +29,7 @@ function install {
   test $(id -u) -eq 0 || exit_err "Permission denied. (Need sudo privilieges)"
   adduser --disabled-password --gecos "" $newuser || exit_err "Can't create user $newuser"
   usermod -a -G "$newgroups" "$newuser" || exit_err "Fail to add $newuser to $newgroups"
-  curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
+  curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
   sed -i.orig -e '' "$source_list" \
     && echo "$uv4l_deb" >> "$source_list" || exit_err "Adding uv4l deb"
       apt-get update && apt-get upgrade -qy || exit_err "Update pi fail."
@@ -38,11 +38,11 @@ function install {
 }
 
 function remove {
+  apt-get purge "${dependencies[@]}"
   test $(id -u) -eq 0 || exit_err "Permission denied. (Need sudo privilieges)"
   deluser --force --remove-home "$newuser" && deluser -g "$newuser" \
     || exit_err "Can't delete $newuser"
   cp "$source_list.orig" "$source_list"
-  apt-get purge "${dependencies[@]}"
 }
 
 function show_help {

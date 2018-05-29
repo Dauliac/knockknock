@@ -8,4 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 );
+INSERT INTO users (email, password)
+VALUES ('admin', 'admin')
 

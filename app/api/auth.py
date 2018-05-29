@@ -14,15 +14,17 @@ from app.api import api
 from hashlib import sha256
 from app.constants import JWT_SECRET, JWT_ALGORITHM
 from app.api.errors import error_response
+from database.users import Users as users_model
 
 @api.route('/login', methods=['POST'])
 def login():
-    # Todo: Find user in database
     user = {
         'email': 'admin@example.com',
-        'password': '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
+        'password': 'admin'
     }
+    users = users_model()
     email = request.form['email'].encode('utf-8')
+    users.find_by_email(email)
     password = request.form['password'].encode('utf-8')
     passhash = sha256(password).hexdigest()
 

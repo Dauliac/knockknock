@@ -10,7 +10,7 @@
 
 from flask import Flask
 import pymysql.cursors
-from database import connector, users
+from database import connector
 import app.constants as cst
 
 def configure():

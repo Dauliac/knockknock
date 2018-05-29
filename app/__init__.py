@@ -8,7 +8,7 @@
 
 """
 
-from flask import Flask
+from flask import Flask, render_template
 
 def configure():
     # Check database status
@@ -22,9 +22,13 @@ def init():
     from app.api import api
 
     app = Flask(__name__)
-    # app.config.from_object('config')
+    app.config.from_object('config')
     app.secret_key = "secret"
     app.register_blueprint(api, url_prefix='/api')
+
+    @app.route('/', methods=['GET'])
+    def home_page():
+        return render_template('login.html')
 
     return app
 

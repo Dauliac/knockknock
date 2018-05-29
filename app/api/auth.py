@@ -9,7 +9,7 @@
 """
 
 import jwt
-from flask import request, jsonify, abort, session
+from flask import request, jsonify, abort, session, render_template
 from app.api import api
 from hashlib import sha256
 from app.constants import JWT_SECRET, JWT_ALGORITHM
@@ -28,7 +28,9 @@ def login():
 
     if user['password'] == passhash:
         token = jwt.encode({ 'user': user['email'] }, JWT_SECRET, JWT_ALGORITHM)
-        return jsonify({ 'token': token })
+        session[user['email']] = token
+        # return jsonify({ 'token': token })
+        return render_template('index.html', token=token)
     else:
         return error_response(401, 'Invalid credentials')
 
@@ -37,6 +39,8 @@ def authenticated():
     token = request.headers.get('Authorization')
     if token:
         decode = jwt.decode(token, JWT_SECRET, JWT_ALGORITHM)
+        if decode['user'] in session:
+            print(session[decode['user']])
         return jsonify({ 'message': 'Authenticated' })
     return error_response(401, 'Unauthorized')
 

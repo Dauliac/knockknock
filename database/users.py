@@ -21,19 +21,22 @@ class Users:
             sql = "SELECT * FROM `users` WHERE `id`=%s"
             cursor.execute(sql, (id))
             self.result = cursor.fetchone()
+            return self.result
         except mysql.connector.InterfaceError as err:
             print('mysql connection lost')
             try:
                 database.connection()
                 self.find_by_id(id)
             except:
+                return False
                 print('sql connection crashed')
 
     def find_by_email(email):
         try:
             sql = "SELECT * FROM `users` WHERE `email`=%s"
             cursor.execute(sql, (email))
-            self.result = cursor.fetchone()
+            self.result = cursor.fetchall()
+            return self.result
         except mysql.connector.InterfaceError as err:
             print('mysql connection lost')
             database.connection()
@@ -41,6 +44,7 @@ class Users:
                 database.connection()
                 self.find_by_email(email)
             except:
+                return False
                 print('sql connection crashed')
 
     def post(email, password, admin_level):
@@ -49,14 +53,16 @@ class Users:
                     "(email, password, admin_level) "
                     "VALUES (%s, %s, %s)")
             cursor.execute(sql, (email, password, admin_level))
-            self.result = cursor.fetchone()
+            self.result = cursor.fetchall()
+            connection.commit()
+            return True
         except mysql.connector.InterfaceError as err:
             print('mysql connection lost')
-            database.connection()
             try:
                 database.connection()
-                self.get_by_id(id)
+                self.post(email, password, admin_level)
             except:
+                return False
                 print('sql connection crashed')
 
     #  def set_email(self, id, email):

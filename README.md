@@ -2,17 +2,17 @@
 
 ## Fonctionnalités
 * [x] Modèle 3D
-* [ ] documentation 3D
-* [ ] sonnette software
-* [ ] sonnette hardware
-* [ ] camera software
-* [ ] camera hardware
-*  interface web
-		- video
+* [ ] Documentation 3D
+* [ ] Sonnette software
+* [ ] Sonnette hardware
+* [ ] Caméra software
+* [ ] caméra hardware
+*  Interface web
+		- vidéo
 		- ​
 * [ ] ​
-* [ ] video over http mono-directionnel
-* [ ] audio bi-directionnel
+* [ ] Vidéo over http mono-directionnel
+* [ ] Audio bi-directionnel
 
 ## In work
 * [ ] Api

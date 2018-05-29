@@ -1,11 +1,47 @@
 <template>
     <header>
-      <nav>
-        <ul class="d-flex flex-row">
-          <li v-for="(link, i) in links" :key="i">
-            <router-link :to="{ name: link.path}" class="d-flex justify-center align-center">{{ link.title }}</router-link>
-          </li>
-        </ul>
+      <nav class="navbar is-black">
+        <div class="navbar-brand">
+          <span class="navbar-item">
+            KnockKnock
+          </span>
+          <div class="navbar-burger burger" data-target="navbar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div id="navbar" class="navbar-menu">
+          <div class="navbar-start">
+            <router-link class="navbar-item" v-for="(link, i) in links" :key="i" :to="{ name: link.path}">{{ link.title }}</router-link>
+          </div>
+        </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+                    <span>
+                Tweet
+              </span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a class="button is-primary" href="https://github.com/jgthms/bulma/releases/download/0.7.1/bulma-0.7.1.zip">
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+                    <span>Deconnexion</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
       </nav>
     </header>
 </template>
@@ -20,10 +56,6 @@ export default {
         {
           title: 'Home',
           path: 'Home'
-        },
-        {
-          title: 'Login',
-          path: 'Login'
         },
         {
           title: 'Stream',
@@ -44,34 +76,4 @@ export default {
 </script>
 
 <style scoped>
-nav {
-  background-color: white;
-  height: 64px;
-  text-transform: uppercase;
-  border-bottom: 1px solid black;
-}
-ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  height: 100%;
-  width: 50%;
-}
-ul li, a {
-  height: 100%;
-  width: 100%;
-}
-ul li a {
-  color: black;
-  text-decoration: none;
-  transition: all .3s ease-in-out;
-}
-ul li a:hover {
-  background-color: black;
-  color: white;
-}
-ul li a:focus {
-  background-color: red;
-  color: white;
-}
 </style>

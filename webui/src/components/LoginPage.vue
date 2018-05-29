@@ -1,15 +1,16 @@
 <template>
-    <div>
-      <h1>Rings</h1>
+    <div class="">
+
     </div>
 </template>
 
 <script>
 export default {
-  name: "Rings"
+    name: 'login-page'
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>
+

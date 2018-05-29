@@ -49,10 +49,10 @@ export default {
 <style scoped>
   .container{
     margin: auto;
-    height:20%;
+    height:9em;
     width: 50%;
     border: 0px solid grey;
-    box-shadow: 5px 5px 5px grey;
+    box-shadow: 1px 1px 5px grey;
     border-radius: .3em;
     font-family: 'Anton', sans-serif;
   }

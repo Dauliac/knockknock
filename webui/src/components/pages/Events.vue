@@ -1,7 +1,6 @@
 <template>
     <div>
-      <h1>Events</h1>
-        <event v-for="(event, i) in events" :event="event" :key="i"></event>
+      <event v-for="(event, i) in events" :event="event" :key="i"></event>
     </div>
 </template>
 
@@ -33,5 +32,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

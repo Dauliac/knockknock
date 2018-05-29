@@ -1,7 +1,7 @@
 # knockknock
 
 ## Fonctionnalités
-* [ ] 3D
+*  3D
 * [ ] documentation 3D
 * [ ] sonnette software
 * [ ] sonnette hardware

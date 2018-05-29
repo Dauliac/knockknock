@@ -12,7 +12,6 @@ from app.api import api
 
 @api.route('/users', methods=['GET'])
 def list_users():
-    # List all users
     pass
 
 @api.route('/users/<int:id>', methods=['GET'])

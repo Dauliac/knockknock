@@ -16,7 +16,7 @@ class Users:
     def __init__(self):
         self.result = None
 
-    def get_by_id(self, id):
+    def find_by_id(self, id):
         try:
             sql = "SELECT * FROM `users` WHERE `id`=%s"
             cursor.execute(sql, (id))
@@ -25,11 +25,11 @@ class Users:
             print('mysql connection lost')
             try:
                 database.connection()
-                self.get_by_id(id)
+                self.find_by_id(id)
             except:
                 print('sql connection crashed')
 
-    def get_by_email(email):
+    def find_by_email(email):
         try:
             sql = "SELECT * FROM `users` WHERE `email`=%s"
             cursor.execute(sql, (email))
@@ -39,7 +39,7 @@ class Users:
             database.connection()
             try:
                 database.connection()
-                self.get_by_email(email)
+                self.find_by_email(email)
             except:
                 print('sql connection crashed')
 

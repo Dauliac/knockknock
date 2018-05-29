@@ -8,7 +8,10 @@
 
 """
 
+from flask import abort
+
 def error_response(status_code, message=None):
     # Return json error object.
-    pass
+    abort(status_code)
+    return { 'message': message }
 

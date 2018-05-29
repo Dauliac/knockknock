@@ -15,6 +15,22 @@ class Users:
     """
     def __init__(self):
         self.result = None
+    
+    def find_all(self):
+        try:
+            sql = "SELECT * FROM `users`"
+            cursor.execute(sql, (id))
+            self.result = cursor.fetchone()
+            return self.result
+        except mysql.connector.InterfaceError as err:
+            print('mysql connection lost')
+            try:
+                database.connection()
+                self.find_by_id(id)
+            except:
+                return False
+                print('sql connection crashed')
+
 
     def find_by_id(self, id):
         try:

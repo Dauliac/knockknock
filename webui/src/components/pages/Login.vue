@@ -3,7 +3,7 @@
     <div class="container" v-if="!isAuthenticated">
       <h1>Login</h1>
       <form class="form">
-        <input v-model="user.email"class="form_field" type="text" placeholder="Username">
+        <input v-model="user.email" class="form_field" type="text" placeholder="Username">
         <input v-model="user.password" class="form_field" type="password" placeholder="Password">
         <button class="btn" type="submit" id="login-button" @click="login(user)">
           Login
@@ -72,5 +72,27 @@ export default {
   .container:hover{
     background-color:rgba(223, 223, 223, 0.281);
     color:black;
+  }
+  .form_field{
+    display: flex;
+    margin:auto;
+    margin-top:1%;
+    border:0;
+    background-color: rgba(145, 145, 145, 0.281);
+    opacity: 7%;
+    font-family: 'Anton', sans-serif;
+  }
+  .btn{
+    margin-top:2%;
+    width: 50%;
+    height: 50%;
+    border: 0;
+    background-color: black;
+    color:white;
+    border-radius: 0.3em;
+    font-family: 'Anton', sans-serif;
+  }
+  .btn:focus{
+    background-color: red;
   }
 </style>

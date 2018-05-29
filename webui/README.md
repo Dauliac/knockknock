@@ -1,21 +1,18 @@
 # knockknock-webui
 
-> Knockknock Webui
+## TODO
+### PAGES
 
-## Build Setup
+- login
 
-``` bash
-# install dependencies
-npm install
+email - password
 
-# serve with hot reload at localhost:8080
-npm run dev
+- paramétres
 
-# build for production with minification
-npm run build
+ajout d'user / options
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+- gestion des sonnettes
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+status de toutes les sonnettes @click -> revoir la video
+
+- flux video

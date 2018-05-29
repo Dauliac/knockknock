@@ -1,16 +1,13 @@
 <template>
     <div>
       <h1>Events</h1>
-      <div v-for="(event, i) in events" :key="i">
-        <p>{{event.id}}</p>
-        <p>{{event.status}}</p>
-        <p>{{event.replay_url}}</p>
-        <p>{{event.timestamp}}</p>
-      </div>
+        <event v-for="(event, i) in events" :event="event" :key="i"></event>
     </div>
 </template>
 
 <script>
+import Event from '../Event';
+
 let events = [];
 for(let i = 1; i < 21; i++) {
   events.push({
@@ -23,12 +20,15 @@ for(let i = 1; i < 21; i++) {
 
 export default {
   name: "Events",
+  components: {
+    Event
+  },
 
   data() {
     return {
       events
     }
-  }
+  },
 }
 </script>
 

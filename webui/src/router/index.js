@@ -34,6 +34,6 @@ export default new Router({
       path: '/options',
       name: 'Options',
       component: Options
-    }
+    },
   ]
 })

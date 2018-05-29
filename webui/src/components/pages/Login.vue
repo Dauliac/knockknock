@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Login</h1>
+
     <user-form :user="user"></user-form>
   </div>
 </template>
@@ -46,5 +47,17 @@ export default {
 </script>
 
 <style scoped>
-
+  .container{
+    margin: auto;
+    height:20%;
+    width: 50%;
+    border: 0px solid grey;
+    box-shadow: 5px 5px 5px grey;
+    border-radius: .3em;
+    font-family: 'Anton', sans-serif;
+  }
+  .container:hover{
+    background-color:rgba(223, 223, 223, 0.281);
+    color:black;
+  }
 </style>

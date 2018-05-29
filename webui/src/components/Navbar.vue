@@ -1,9 +1,9 @@
 <template>
     <header>
       <nav>
-        <ul>
+        <ul class="d-flex flex-row">
           <li v-for="(link, i) in links" :key="i">
-            <router-link :to="{ name: link.path}">{{ link.title }}</router-link>
+            <router-link :to="{ name: link.path}" class="d-flex justify-center align-center">{{ link.title }}</router-link>
           </li>
         </ul>
       </nav>
@@ -52,13 +52,22 @@ nav {
 }
 ul {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   height: 100%;
-  width: 80%;
+  width: 50%;
 }
-ul li {
+ul li, a {
   height: 100%;
   width: 100%;
+}
+ul li a {
+  color: black;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+}
+ul li a:hover {
+  background-color: black;
+  color: white;
 }
 </style>

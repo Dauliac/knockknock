@@ -15,10 +15,12 @@ from app.constants import JWT_SECRET, JWT_ALGORITHM
 from app.api.errors import error_response
 from flask_socketio import send, emit, SocketIO
 from app.api import api
+from flask_cors import CORS
 # import pymysql.cursors
 # from database import users, ringtones
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object('config')
 app.register_blueprint(api, url_prefix='/api')
 socketio = SocketIO(app)

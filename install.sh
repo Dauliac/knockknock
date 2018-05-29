@@ -16,7 +16,7 @@ mode="dev"
 source_list="/etc/apt/sources.list"
 uv4l_key_url="http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc"
 uv4l_deb="deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/stretch stretch main"
-
+pydir="Python-3.6.5.tar.xz"
 dependencies=( "uv4l" "uv4l-raspicam" "ffmpeg" "uv4l-tc358743-extras" "uv4l-server" )
 
 function exit_err {
@@ -35,6 +35,10 @@ function install {
       apt-get update && apt-get upgrade -qy || exit_err "Update pi fail."
       apt-get install -qy --allow-unauthenticated "${dependencies[@]}" \
         || exit_err "Install dependencies"
+  curl -sLO "https://www.python.org/ftp/python/3.6.5/$pydir"
+  cd "$pydir"
+  ./configure && make && make "test" && make install
+  python3.6 -v
 }
 
 function remove {

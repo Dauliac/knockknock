@@ -4,8 +4,6 @@ from flask import Flask, url_for, render_template, request, redirect
 import jwt
 import pymysql.cursors
 
-# Config
-
 #   Flask
 app = Flask(__name__)
 app.debug = True

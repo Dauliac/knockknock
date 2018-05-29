@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/pages/Home'
-import Login from '@/components/pages/Login'
 import Events from '@/components/pages/Events'
 import Stream from '@/components/pages/Stream'
 import Options from '@/components/pages/Options'
@@ -14,11 +13,6 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
     },
     {
       path: '/events',

@@ -1,9 +1,4 @@
-#!/bin/bash
-# Author      : github.com/TonyChG
-# Date        : Tue 29 May 2018 11:04:39 AM CEST
-# Version     : 0.0.1
-# Description :
-
+#!/usr/bin/bash
 source curl_env
 
 RES=$(curl -s -X POST ${URL}:${PORT}${BASE_PATH}/secure/users/ \

@@ -6,8 +6,8 @@
 
 """
 
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 api = Blueprint('api', __name__)
 
-from app.api import users, auth, ringtones, errors
+from app.api import ringtones, errors

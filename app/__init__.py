@@ -8,28 +8,52 @@
 
 """
 
-from flask import Flask
+import jwt
+from flask import Flask, render_template, jsonify, request, session
+from hashlib import sha256
+from app.constants import JWT_SECRET, JWT_ALGORITHM
+from app.api.errors import error_response
+from flask_socketio import send, emit, SocketIO
+from app.api import api
 import pymysql.cursors
-from database import connector
-import app.constants as cst
+from database import users, ringtones
 
-def configure():
-    # Connect to DB
-    db = Connection(cst.SQL_USER, cts.SQL_PWD, cst.SQL_HOST, cst.SQL_DB)
-    db.connect()
-    # Validate all api tokens
-    # Validate models
-    # Import configs
-    pass
+app = Flask(__name__)
+app.config.from_object('config')
+socketio = SocketIO(app)
 
-def init():
-    # Bind routes
-    from app.api import api
+@app.route('/', methods=['GET'])
+def home_page():
+    return render_template('login.html')
 
-    app = Flask(__name__)
-    # app.config.from_object('config')
-    app.secret_key = "secret"
+@app.route('/', methods=['POST'])
+def login():
+    email = request.form['email'].encode('utf-8')
+    password = request.form['password'].encode('utf-8')
+    passhash = sha256(password).hexdigest()
+
+    user = users.find_by_email(email)
+    print(user)
+    user = {
+        'email': 'admin@example.com',
+        'password': '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
+    }
+    if user['password'] == passhash:
+        token = jwt.encode({ 'user': user['email'] }, JWT_SECRET, JWT_ALGORITHM)
+        session[user['email']] = token
+        #  return jsonify({ 'token': token })
+        return render_template('index.html', token=token)
+    else:
+        return error_response(401, 'Invalid credentials')
+
+# @socketio.on('connected')
+def handle_connection(data):
+    emit('customEmit')
+    emit('customEmit', jsonify({ 'useremail': user['email'], 'token': token }))
+    # print(data)
+
+def run(host):
     app.register_blueprint(api, url_prefix='/api')
-
-    return app
+    socketio.on_event('connected', handle_connection)
+    socketio.run(app, host=host)
 

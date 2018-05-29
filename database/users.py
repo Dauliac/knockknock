@@ -11,21 +11,23 @@ import pymysql.cursors
 
 class Users:
     """
-        User db interface.
+        User self.client.interface.
     """
-    def __init__(self):
+    def __init__(self, client):
         self.result = None
+        self.client = client
 
     def find_all(self):
         try:
             sql = "SELECT * FROM `users`"
+            client = self.client
             cursor.execute(sql, (id))
             self.result = cursor.fetchone()
             return self.result
         except:
             print('mysql connection lost')
             try:
-                db.connect()
+                self.client.connect()
                 self.find_by_id(id)
             except:
                 return False
@@ -40,7 +42,7 @@ class Users:
         except:
             print('mysql connection lost')
             try:
-                db.connection()
+                self.client.connection()
                 self.find_by_id(id)
             except:
                 return False
@@ -54,9 +56,9 @@ class Users:
             return self.result
         except :
             print('mysql connection lost')
-            db.connect()
+            self.client.connect()
             try:
-                db.connection()
+                self.client.connection()
                 self.find_by_email(email)
             except:
                 return False
@@ -74,7 +76,7 @@ class Users:
         except:
             print('mysql connection lost')
             try:
-                db.connect()
+                self.client.connect()
                 self.post(email, password, admin_level)
             except:
                 return False
@@ -92,7 +94,7 @@ class Users:
         except:
             print('mysql connection lost')
             try:
-                db.connect()
+                self.client.connect()
                 self.post(email, password, admin_level)
             except:
                 return False

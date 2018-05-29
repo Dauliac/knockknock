@@ -9,7 +9,7 @@
 """
 SQL_USER = 'root'
 SQL_DB = 'knockknock'
-SQL_HOST = 'localhost'
+SQL_HOST = '127.0.0.1'
 SQL_PWD = 'root'
 
 JWT_SECRET="secret"

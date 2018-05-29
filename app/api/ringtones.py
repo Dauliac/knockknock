@@ -16,21 +16,21 @@ def list_ringtones():
     pass
 
 @api.route('/ringtones/<int:id>', methods=['GET'])
-def get_event():
-    # Get event by id
+def get_ringtone():
+    # Get ringtone by id
     pass
 
 @api.route('/ringtones/<int:id>', methods=['PUT'])
-def update_event():
-    # Update event by id
+def update_ringtone():
+    # Update ringtone by id
     pass
 
 @api.route('/ringtones', methods=['POST'])
-def create_event():
-    # Create new event
+def create_ringtone():
+    # Create new ringtone
     pass
 
 @api.route('/ringtones/<int:id>', methods=['DELETE'])
-def delete_event():
-    # Delete event by id
+def delete_ringtone():
+    # Delete ringtone by id
     pass

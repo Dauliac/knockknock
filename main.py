@@ -2,13 +2,13 @@
 # coding: utf-8
 """
     Author      : github.com/TonyChG
-    Date        : Wed 16 May 2018 03:36:00 AM CEST
+    Date        : Tue 29 May 2018 04:16:47 PM CEST
     Description : 
     Usage       :
 
 """
 
-from app import configure, init
+import app
+
 if __name__ == '__main__':
-    app = init()
-    app.run(debug=True, host='0.0.0.0')
+    app.run(host='0.0.0.0')

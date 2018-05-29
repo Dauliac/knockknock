@@ -8,10 +8,12 @@
 
 """
 
-from flask import abort
+from flask import make_response, jsonify
 
 def error_response(status_code, message=None):
     # Return json error object.
-    abort(status_code)
-    return { 'message': message }
+    return make_response(jsonify({
+        'status': 'fail',
+        'message': message
+    })), status_code
 

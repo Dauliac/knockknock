@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/python
 # coding: utf-8
 """
@@ -12,3 +13,5 @@ SQL_DB = 'knockknock'
 SQL_HOST = 'localhost'
 SQL_PWD = 'root'
 
+JWT_SECRET="secret"
+JWT_ALGORITHM="HS256"

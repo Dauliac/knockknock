@@ -25,7 +25,10 @@ def configure():
 def init():
     # Bind routes
     from app.api import api
+
     app = Flask(__name__)
+    # app.config.from_object('config')
+    app.secret_key = "secret"
     app.register_blueprint(api, url_prefix='/api')
 
     return app

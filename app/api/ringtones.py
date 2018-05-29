@@ -10,27 +10,27 @@
 
 from app.api import api
 
-@api.route('/events', methods=['GET'])
-def list_events():
-    # List all events
+@api.route('/ringtones', methods=['GET'])
+def list_ringtones():
+    # List all ringtones
     pass
 
-@api.route('/events/<int:id>', methods=['GET'])
+@api.route('/ringtones/<int:id>', methods=['GET'])
 def get_event():
     # Get event by id
     pass
 
-@api.route('/events/<int:id>', methods=['PUT'])
+@api.route('/ringtones/<int:id>', methods=['PUT'])
 def update_event():
     # Update event by id
     pass
 
-@api.route('/events', methods=['POST'])
+@api.route('/ringtones', methods=['POST'])
 def create_event():
     # Create new event
     pass
 
-@api.route('/events/<int:id>', methods=['DELETE'])
+@api.route('/ringtones/<int:id>', methods=['DELETE'])
 def delete_event():
     # Delete event by id
     pass

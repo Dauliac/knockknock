@@ -9,9 +9,14 @@
 """
 
 from flask import Flask
+import pymysql.cursors
+from database import connector, users
+import app.constants as cst
 
 def configure():
-    # Check database status
+    # Connect to DB
+    db = Connect(cst.SQL_USER, cts.SQL_PWD, cst.SQL_HOST, cst.SQL_DB)
+    db.Connect()
     # Validate all api tokens
     # Validate models
     # Import configs

@@ -11,12 +11,12 @@
 import jwt
 from flask import Flask, render_template, jsonify, request, session
 from hashlib import sha256
-from app.constants import JWT_SECRET, JWT_ALGORITHM, SQL_USER, SQL_PWD, SQL_HOST, SQL_DB
+from app.constants import JWT_SECRET, JWT_ALGORITHM
 from app.api.errors import error_response
 from flask_socketio import send, emit, SocketIO
 from app.api import api
 import pymysql.cursors
-from database import connector, users
+from database import users, ringtones
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -52,8 +52,7 @@ def handle_connection(data):
     # print(data)
 
 def run(host):
-    db = Connect(SQL_USER, SQL_PWD, SQL_HOST, SQL_DB)
-    db.Connect()
     app.register_blueprint(api, url_prefix='/api')
     socketio.on_event('connected', handle_connection)
     socketio.run(app, host=host)
+

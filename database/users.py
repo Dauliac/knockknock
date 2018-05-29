@@ -13,7 +13,7 @@ class Users:
     """
         User database interface.
     """
-    def __init__(self):
+    def __init__(self, client):
         self.result = None
 
     def get_by_id(self, id):

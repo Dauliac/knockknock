@@ -10,5 +10,5 @@ from flask import Blueprint
 
 api = Blueprint('api', __name__)
 
-from app.api import users, auth, events, errors
+from app.api import users, auth, ringtones, errors
 

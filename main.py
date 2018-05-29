@@ -9,7 +9,6 @@
 """
 
 from app import configure, init
-
 if __name__ == '__main__':
     app = init()
     app.run(debug=True, host='0.0.0.0')

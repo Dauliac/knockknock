@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # coding: utf-8
 import pymysql.cursors
-from pymysql.err import OperationalError
-from pymysql import InternalError
 class Connection():
     def __init__(self, user, password, host, database, tries=2):
         self.user = user

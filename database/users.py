@@ -24,7 +24,7 @@ class Users:
             cursor.execute(sql, (id))
             self.result = cursor.fetchone()
             return self.result
-        except:
+        except :
             print('mysql connection lost')
             try:
                 self.client.connect()
@@ -54,7 +54,7 @@ class Users:
             cursor.execute(sql, (email))
             self.result = cursor.fetchall()
             return self.result
-        except :
+        except:
             print('mysql connection lost')
             self.client.connect()
             try:
@@ -70,7 +70,6 @@ class Users:
                     "(email, password, admin_level) "
                     "VALUES (%s, %s, %s)")
             cursor.execute(sql, (email, password, admin_level))
-            self.result = cursor.fetchall()
             connection.commit()
             return True
         except:
@@ -81,25 +80,7 @@ class Users:
             except:
                 return False
                 print('sql connection crashed')
-
-    def delete(self, id):
-        try:
-            sql = ("INSERT INTO users "
-                    "(email, password, admin_level) "
-                    "VALUES (%s, %s, %s)")
-            cursor.execute(sql, (email, password, admin_level))
-            self.result = cursor.fetchall()
-            connection.commit()
-            return True
-        except:
-            print('mysql connection lost')
-            try:
-                self.client.connect()
-                self.post(email, password, admin_level)
-            except:
-                return False
-                print('sql connection crashed')
-
+    #  def set_email(self, id, email):
     #  def set_email(self, id, email):
     #  def set_password(self, id, email):
     #  def set_admin_level(self, id, email):

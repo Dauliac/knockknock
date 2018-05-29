@@ -15,8 +15,8 @@ import app.constants as cst
 
 def configure():
     # Connect to DB
-    db = Connect(cst.SQL_USER, cts.SQL_PWD, cst.SQL_HOST, cst.SQL_DB)
-    db.Connect()
+    db = Connection(cst.SQL_USER, cts.SQL_PWD, cst.SQL_HOST, cst.SQL_DB)
+    db.connect()
     # Validate all api tokens
     # Validate models
     # Import configs

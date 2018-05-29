@@ -39,20 +39,22 @@ def login():
 
     if user['password'] == passhash:
         token = jwt.encode({ 'user': user['email'] }, JWT_SECRET, JWT_ALGORITHM)
-        session[user['email']] = token
-        # return jsonify({ 'token': token })
+        session['user'] = {
+            'userMail': user['email'],
+            'userToken': str(token)
+        }
         return render_template('index.html', token=token)
     else:
         return error_response(401, 'Invalid credentials')
 
-# @socketio.on('connected')
-def handle_connection(data):
-    emit('customEmit')
-    emit('customEmit', jsonify({ 'useremail': user['email'], 'token': token }))
-    # print(data)
+@socketio.on('connect')
+def handle_connection():
+    if 'user' in session:
+        print('Connected!')
+        emit('connected', session['user'])
+    else:
+        emit('unauthorized')
 
 def run(host):
     app.register_blueprint(api, url_prefix='/api')
-    socketio.on_event('connected', handle_connection)
     socketio.run(app, host=host)
-

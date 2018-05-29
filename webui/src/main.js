@@ -3,11 +3,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueSocketIo from 'vue-socket.io'
-import socketio from 'socket.io-client'
 import { url } from './config'
 
-Vue.use(VueSocketIo, socketio(url), store);
-
+Vue.use(VueSocketIo, 'http://0.0.0.0:5000', store);
 Vue.config.productionTip = false;
 
 new Vue({
@@ -15,5 +13,5 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 });

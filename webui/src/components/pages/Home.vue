@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Home</h1>
     <h2>Welcome {{ user }}</h2>
   </div>
 </template>

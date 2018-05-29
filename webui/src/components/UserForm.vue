@@ -30,7 +30,7 @@ export default {
     border: 0;
     background-color: black;
     color:white;
-    border-radius: 0.5em;
+    border-radius: 0.3em;
     font-family: 'Anton', sans-serif;
   }
   .btn:focus{

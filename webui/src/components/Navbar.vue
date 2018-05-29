@@ -70,4 +70,8 @@ ul li a:hover {
   background-color: black;
   color: white;
 }
+ul li a:focus {
+  background-color: red;
+  color: white;
+}
 </style>

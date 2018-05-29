@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Options</h1>
     <div>
       <label>Telegram token :</label>
       <input v-model="telegramToken"/>

@@ -10,4 +10,4 @@ from flask import Blueprint, render_template
 
 api = Blueprint('api', __name__)
 
-from app.api import users, auth, events, errors
+from app.api import users, ringtones, errors

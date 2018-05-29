@@ -31,7 +31,6 @@ class Users:
                 return False
                 print('sql connection crashed')
 
-
     def find_by_id(self, id):
         try:
             sql = "SELECT * FROM `users` WHERE `id`=%s"

@@ -9,7 +9,9 @@
 """
 
 from app import configure, init
+from flask_socketio import SocketIO
 
 if __name__ == '__main__':
     app = init()
-    app.run(debug=True, host='0.0.0.0')
+    socketio = SocketIO(app)
+    socketio.run(app, host='0.0.0.0')

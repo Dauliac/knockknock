@@ -1,15 +1,23 @@
 <template>
   <div>
     <h1>Home</h1>
+    <h2>Welcome {{ user }}</h2>
   </div>
 </template>
 
 <script>
+import Navbar from '../Navbar';
+
 export default {
   name: 'Home',
+
+  components: {
+    Navbar
+  },
+
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      user: 'Admin'
     }
   }
 }

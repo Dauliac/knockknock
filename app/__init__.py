@@ -15,12 +15,12 @@ from app.constants import JWT_SECRET, JWT_ALGORITHM
 from app.api.errors import error_response
 from flask_socketio import send, emit, SocketIO
 from app.api import api
-import pymysql.cursors
-import datetime
-from database import users, ringtones
+# import pymysql.cursors
+# from database import users, ringtones
 
 app = Flask(__name__)
 app.config.from_object('config')
+app.register_blueprint(api, url_prefix='/api')
 socketio = SocketIO(app)
 
 @app.route('/', methods=['GET'])
@@ -51,19 +51,26 @@ def login():
 @socketio.on('connect')
 def handle_connection():
     if 'user' in session:
+        print('Socket connected')
         emit('connected', session['user'])
     else:
         emit('unauthorized')
 
-@socketio.on('ping')
-def handle_ping():
-    emit('call', {
-        'status': 1,
-        'replay_url': 'http://google.com',
-        'timestamp': datetime.now()
-    })
+@socketio.on('message')
+def handle_message(message):
+    if message == 'ping':
+        emit('call', {
+            'status': 1,
+            'replay_url': 'http://google.com',
+        })
+    if message == 'accept':
+        emit('streaming', { 'video_url': 'http://google.com' })
+    if message == 'decline':
+        emit('unauthorized')
 
 def run(host):
-    app.register_blueprint(api, url_prefix='/api')
-    socketio.run(app, host=host)
+    try:
+        socketio.run(app, host=host, debug=True)
+    except Exception as error:
+        print(error)
 

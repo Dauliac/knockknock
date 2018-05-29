@@ -18,12 +18,19 @@ export default {
     Navbar
   },
   mounted () {
-    const socket = io('http://0.0.0.0:5000');
+    const socket = this.$store.getters.socket;
 
     socket.on('connected', (data) => {
       this.$store.dispatch('connected', data);
     });
 
+    socket.on('call', (ringtone) => {
+      console.log(ringtone);
+    });
+
+    socket.on('streaming', (video_url) => {
+      console.log(video_url);
+    });
   }
 }
 </script>

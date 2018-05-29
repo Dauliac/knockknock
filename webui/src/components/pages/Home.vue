@@ -3,7 +3,7 @@
     <h2>Welcome {{ user }}</h2>
     <button @click="login(user)">click</button>
 
-    <button @click="clickButton(1)">Socket emit</button>
+    <button @click="simulateCall">Simulate Call</button>
   </section>
 </template>
 
@@ -28,7 +28,12 @@ export default {
   methods: {
     ...mapActions([
       'login'
-    ])
+    ]),
+
+    simulateCall () {
+      const socket = this.$store.getters.socket;
+      socket.emit('message', 'ping');
+    }
   }
 }
 </script>

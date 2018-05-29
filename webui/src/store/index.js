@@ -6,6 +6,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex';
+import io from 'socket.io-client';
 
 Vue.use(Vuex);
 
@@ -19,14 +20,16 @@ export default () => {
     getters: {
       isAuthenticated: state => state.isAuthenticated,
       userMail: state => state.userMail,
-      userToken: state => state.userToken
+      userToken: state => state.userToken,
+      socket: state => {
+        return io('http://0.0.0.0:5000')
+      },
     },
     actions: {
       login ({ state,vu }) {
         state.isAuthenticated = !state.isAuthenticated;
         state.userMail = user.mail;
         state.userToken = user.token;
-        console.log(state);
       },
 
       connected ({ state }, { userMail, userToken }) {

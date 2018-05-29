@@ -16,6 +16,7 @@ from app.api.errors import error_response
 from flask_socketio import send, emit, SocketIO
 from app.api import api
 import pymysql.cursors
+import datetime
 from database import users, ringtones
 
 app = Flask(__name__)
@@ -50,11 +51,19 @@ def login():
 @socketio.on('connect')
 def handle_connection():
     if 'user' in session:
-        print('Connected!')
         emit('connected', session['user'])
     else:
         emit('unauthorized')
 
+@socketio.on('ping')
+def handle_ping():
+    emit('call', {
+        'status': 1,
+        'replay_url': 'http://google.com',
+        'timestamp': datetime.now()
+    })
+
 def run(host):
     app.register_blueprint(api, url_prefix='/api')
     socketio.run(app, host=host)
+

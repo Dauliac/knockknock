@@ -1,4 +1,4 @@
 ressources/
 __pycache__/
 *.pyc
-env
+env/

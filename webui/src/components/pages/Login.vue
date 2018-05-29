@@ -1,20 +1,31 @@
 <template>
-  <div class="container">
-    <h1>Login</h1>
-
-    <user-form :user="user"></user-form>
+  <div class="test">
+    <div class="container" v-if="!isAuthenticated">
+      <h1>Login</h1>
+      <form class="form">
+        <input v-model="user.email"class="form_field" type="text" placeholder="Username">
+        <input v-model="user.password" class="form_field" type="password" placeholder="Password">
+        <button class="btn" type="submit" id="login-button" @click="login(user)">
+          Login
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import UserForm from "../UserForm";
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: "Login",
-  components: {
-    UserForm
+
+  computed: {
+    ...mapGetters([
+      'isAuthenticated'
+    ])
   },
+
   data() {
     return {
       user: {
@@ -25,6 +36,10 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'login'
+    ]),
+
     resetUser() {
       this.user.email = '';
       this.user.password = '';
@@ -35,12 +50,10 @@ export default {
     },
 
     async postRequest() {
-      const post = await axios.post('/login', {
-        email: this.user.email,
-        password: this.user.password
-      });
-      console.log(post);
-      this.resetUser();
+      // const post = await axios.post('/login', {
+      //   email: this.user.email,
+      //   password: this.user.password
+      // });
     }
   }
 }

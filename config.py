@@ -6,3 +6,5 @@ DATABASE_USER="root"
 DATABASE_PASSWORD="root"
 DATABASE_NAME="knockknock"
 
+ENVIRONMENT="development"
+

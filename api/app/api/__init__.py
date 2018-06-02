@@ -6,7 +6,7 @@
 
 """
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, jsonify
 
 api = Blueprint('api', __name__)
 

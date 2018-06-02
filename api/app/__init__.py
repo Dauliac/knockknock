@@ -14,11 +14,8 @@ from hashlib import sha256
 from app.api.errors import error_response
 from app.api import api
 from flask_cors import CORS
-from flaskext.mysql import MySQL
 
-mysql = MySQL()
 app = Flask(__name__)
-mysql.init_app(app)
 CORS(app)
 app.config.from_object('config')
 app.register_blueprint(api, url_prefix='/api')

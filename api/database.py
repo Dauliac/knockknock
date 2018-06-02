@@ -6,8 +6,6 @@
 
 """
 
-from flaskext.mysql import MySQL
-
 class User:
     def __init__(self):
         self.cursor = client.get_db().cursor()

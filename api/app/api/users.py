@@ -7,12 +7,15 @@
     Usage       :
 
 """
-
+from flask import jsonify
 from app.api import api
 
 @api.route('/users', methods=['GET'])
 def list_users():
     # List all users
+    db.execute("SELECT id, email FROM users")
+    users = db.fetchall()
+    return jsonify(users)
     pass
 
 @api.route('/users/<int:id>', methods=['GET'])

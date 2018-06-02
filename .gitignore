@@ -1,4 +1,5 @@
 ressources/
 __pycache__/
 *.pyc
-env/
+pyenv35
+env

@@ -25,13 +25,15 @@ export default () => {
         return io('http://0.0.0.0:5000')
       },
     },
+    mutations: {
+
+    },
     actions: {
-      login ({ state,vu }) {
+      login ({ state }) {
         state.isAuthenticated = !state.isAuthenticated;
         state.userMail = user.mail;
         state.userToken = user.token;
       },
-
       connected ({ state }, { userMail, userToken }) {
         state.userMail = userMail;
         state.userToken = userToken;

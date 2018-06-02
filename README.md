@@ -2,7 +2,7 @@
 
 How to run the project:
 
-## API
+## API + Front in Production
 - with docker (recommended)
 ```
 # Clean
@@ -18,7 +18,7 @@ How to run the project:
 ./init up
 ```
 
-# API + Front in Production
+## API Dev + Front Dev
 Go to http://localhost:8080
 
 - without docker (development)

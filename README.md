@@ -37,8 +37,8 @@ source $(./pyenv)
 pip install -r requirement.txt
 ./main.py
 ```
-DevAPI: http://localhost:5000/api
-DevFront: http://localhost:8080
+- DevAPI: http://localhost:5000/api
+- DevFront: http://localhost:8080
 
 ## Database
 - with docker

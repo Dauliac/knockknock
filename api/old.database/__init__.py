@@ -10,9 +10,7 @@ from database.users import Users
 from database.ringtones import Ringtones
 from database.connector import Connection
 
-# test Conenction
-client = 0
-
+client = Connection("admin", "password", "0.0.0.0", "knockknock")
 users = Users(client)
 ringtones = Ringtones(client)
 

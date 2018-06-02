@@ -11,14 +11,14 @@
 import jwt
 from flask import Flask, render_template, jsonify, request, session
 from hashlib import sha256
-from app.constants import JWT_SECRET, JWT_ALGORITHM
 from app.api.errors import error_response
 from app.api import api
 from flask_cors import CORS
-# import pymysql.cursors
-# from database import users, ringtones
+from flaskext.mysql import MySQL
 
+mysql = MySQL()
 app = Flask(__name__)
+mysql.init_app(app)
 CORS(app)
 app.config.from_object('config')
 app.register_blueprint(api, url_prefix='/api')

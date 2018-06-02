@@ -9,6 +9,8 @@
 """
 #  from connector import Connection
 
+from hashlib import sha256
+
 class Users:
     """
         User database interface.
@@ -29,7 +31,7 @@ class Users:
             except:
                 print('sql connection crashed')
 
-    def get_by_email(email):
+    def get_by_email(self, email):
         try:
             sql = "SELECT * FROM `users` WHERE `email`=%s"
             cursor.execute(sql, (email))
@@ -43,12 +45,12 @@ class Users:
             except:
                 print('sql connection crashed')
 
-    def post(email, password, admin_level):
+    def post(self, email, password, admin_level):
         try:
             sql = ("INSERT INTO users "
                     "(email, password, admin_level) "
                     "VALUES (%s, %s, %s)")
-            cursor.execute(sql, (email, password, admin_level))
+            cursor.execute(sql, (email, sha256(password).hexdigest(), admin_level))
             self.result = cursor.fetchone()
         except mysql.connector.InterfaceError as err:
             print('mysql connection lost')

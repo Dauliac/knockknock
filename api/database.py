@@ -5,17 +5,27 @@
     Usage       :
 
 """
+import mysql.connector
 
-class User:
-    def __init__(self):
-        self.cursor = client.get_db().cursor()
+def commit(client, querystring):
+    cursor = client.cursor()
+    cursor.execute(querystring)
+    client.commit()
 
-class Ringtone:
-    def __init__(self):
-        self.cursor = client.get_db().cursor()
+def results(client, querystring):
+    cursor = client.cursor()
+    cursor.execute(querystring)
+    return cursor.fetchall()
 
-class Client:
-    def __init__(self, app):
-        mysql = MySQL()
-        mysl.init_app(app)
+def init_db(app):
+    client = mysql.connector.connect(
+            host=app.config["MYSQL_DATABASE_HOST"],
+            user=app.config["MYSQL_DATABASE_USER"],
+            password=app.config["MYSQL_DATABASE_PASSWORD"],
+            database=app.config["MYSQL_DATABASE_DB"]
+            )
+    print(results(client, 'show tables'))
+    return client
 
+def get_models(client):
+    return client

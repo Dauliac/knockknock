@@ -33,3 +33,16 @@ pip install -r requirement.txt
 ```
 DevAPI: http://localhost:5000/api
 DevFront: http://localhost:8080
+
+## Database
+- with docker
+```
+# Start mariadb container
+./database/init.sh
+# Import tables
+mysql -h0.0.0.0 -uadmin -ppassword knockknock < database/users.sql
+mysql -h0.0.0.0 -uadmin -ppassword knockknock < database/events.sql
+
+# Connect to database
+mysql -h0.0.0.0 -uadmin -ppassword knockknock
+```

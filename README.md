@@ -1,6 +1,12 @@
 # Knockknock
 
+Build only tested on Linux
+
 How to run the project:
+
+## Requirements
+- virtualenv + python35 (optional)
+- docker
 
 ## API + Front in Production
 - with docker (recommended)

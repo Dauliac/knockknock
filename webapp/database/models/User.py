@@ -31,29 +31,30 @@ class User(Repository):
     def flush(self):
         return self.commit('truncate users')
 
-    def findby_id(self, id, filter=False):
-        return self.find("id = '{}'".format(id), filter)
+    def findby_id(self, id):
+        return self.find("id = '{}'".format(id))
 
-    def findby_email(self, email, filter=False):
-        return self.find("email = '{}'".format(email), filter)
+    def findby_email(self, email):
+        return self.find("email = '{}'".format(email))
 
     def create(self, email, password):
         password = sha256(password.encode('utf-8')).hexdigest()
-        querystring = "insert into users(email, password, admin_level, created_at) values ('{}', '{}', 0, NOW())"
+        querystring = "insert into users(email, password, admin_level, created_at, last_login) values ('{}', '{}', 0, NOW(), NOW())"
         return self.commit(querystring.format(email, password))
 
     def update(self, user):
         req_user = self.serialize(self.findby_id(user['id']))
-        querystring = 'update users'
-        changing = False
-        for key in user:
-            if key not in self.keys:
-                return None
-            else:
-                if req_user[key] != user[key]:
-                    changing = True
-                    querystring += " set {} = '{}'".format(key, user[key])
+        querystring = "update users set"
+        values = []
+        for key in self.keys[1:]:
+            if key in user and req_user[key] != user[key]:
+                values.append(" {} = '{}'".format(key, user[key]))
+        querystring += ((',').join(tuple(values)))
         querystring += " where id = {}".format(user['id'])
-        self.commit(querystring)
+        if len(values) > 0:
+            self.commit(querystring)
+        return self.serialize(self.findby_id(user['id']), True)
 
-        return self.findby_email(req_user['email'])
+    def remove(self, id):
+        querystring = "delete from {} where id = {}"
+        return self.commit(querystring.format(self.table, id))

@@ -40,8 +40,6 @@ class Repository:
             key = self.keys[i]
             if not filter or filter and (key not in self.private):
                 obj[key] = row[i]
-            else:
-                obj[key] = ''
         return obj
 
     def findall(self, filter=False):
@@ -51,9 +49,9 @@ class Repository:
             collection.append(self.serialize(item, filter))
         return collection
     
-    def find(self, condition, filter=False):
+    def find(self, condition):
         item = self.findone("select * from {} where {}".format(self.table, condition))
-        return self.serialize(item, filter)
+        return item
 
     def findone(self, querystring):
         self.init_cursor()

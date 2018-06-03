@@ -25,10 +25,10 @@ def find_all():
 def find_one(id):
     models = get_models()
     User = models.get('User')
-    user = User.findby_id(id, filter=True)
+    user = User.findby_id(id)
     if not user:
         return error_response('Not found', 404)
-    return jsonify(user)
+    return jsonify(User.serialize(user, True))
 
 @bp.route('/<id>', methods=['PUT'])
 def update(id):
@@ -37,9 +37,31 @@ def update(id):
     updateUser = {
             'id': id,
             'email': request.form['email'],
-            'admin_level': request.form['admin_level'],
+            'admin_level': int(request.form['admin_level']),
             'auth_token': request.form['auth_token']
             }
     updateUser = User.update(updateUser)
 
     return jsonify(updateUser)
+
+@bp.route('/create', methods=['POST'])
+def create():
+    models = get_models()
+    User = models.get('User')
+    if 'email' not in request.form or 'password' not in request.form:
+        return error_response('Invalid form', 301)
+    usermail = request.form['email']
+    password = request.form['password']
+    new_user = User.create(usermail, password)
+    return jsonify(User.serialize(User.findby_email(usermail), True))
+
+@bp.route('/<id>', methods=['DELETE'])
+def remove(id):
+    models = get_models()
+    User = models.get('User')
+    user = User.findby_id(id)
+    if not user:
+        return error_response('Not found.', 404)
+    if User.remove(id):
+        return error_response('Error on delete.', 400)
+    return jsonify({ 'status': 'Success' })

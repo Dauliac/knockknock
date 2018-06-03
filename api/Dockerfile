@@ -9,12 +9,11 @@ ADD . /usr/src
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-RUN ln -sf /usr/src/webui/index.html /usr/src/app/templates/index.html
-RUN ln -sf /usr/src/webui/static /usr/src/app/static
+# RUN rm -rfv /usr/src/webui/static
+# RUN rm -rfv /usr/src/webui/index.html
 
-COPY . .
 EXPOSE 5000
 
 # Run
-CMD ["python", "./main.py"]
+CMD ["python", "./app.py"]
 

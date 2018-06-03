@@ -1,8 +1,6 @@
-#!/usr/bin/python
-# coding: utf-8
 """
     Author      : github.com/TonyChG
-    Date        : Wed 16 May 2018 03:29:10 AM CEST
+    Date        : Sat 02 Jun 2018 10:16:14 PM CEST
     Description : 
     Usage       :
 
@@ -10,10 +8,9 @@
 
 from flask import make_response, jsonify
 
-def error_response(status_code, message=None):
-    # Return json error object.
+def error_response(message, status_code):
     return make_response(jsonify({
         'status': 'fail',
         'message': message
-    })), status_code
+        })), status_code
 

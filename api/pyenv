@@ -4,6 +4,20 @@
 # Version     : 0.0.1
 # Description :
 
-test -f $(which python3.5) &&
-  virtualenv --python=python3.5 pyenv35 > /dev/null \
-  && echo "pyenv35/bin/activate" 
+case "$1" in
+  create)
+    export MYSQL_DATABASE_HOST="0.0.0.0"
+    export MYSQL_DATABASE_USER="admin"
+    export MYSQL_DATABASE_PASSWORD="password"
+    export MYSQL_DATABASE_DB="knockknock"
+    export FLASK_ENV="development"
+    test -f $(which python3.5) &&
+      virtualenv --python=python3.5 pyenv35 > /dev/null \
+      && echo "pyenv35/bin/activate" 
+    ;;
+  export)
+    pip install -r requirements.txt
+    ;;
+  *)
+    >&2 echo  "Usage: $0 export | source \$($0 create)"
+esac

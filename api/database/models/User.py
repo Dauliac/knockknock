@@ -56,7 +56,8 @@ class User(Repository):
         return self.findone("select * from users where id = '{}'".format(id))
 
     def findby_email(self, email):
-        return self.serialize(self.findone("select * from users where email = '{}'".format(email)))
+        user = self.findone("select * from users where email = '{}'".format(email))
+        return self.serialize(user)
 
     def create(self, email, password):
         password = sha256(password.encode('utf-8')).hexdigest()
@@ -75,7 +76,6 @@ class User(Repository):
                     changing = True
                     querystring += " set {} = '{}'".format(key, user[key])
         querystring += " where id = {}".format(user['id'])
-        print(querystring)
         self.commit(querystring)
 
         return self.findby_email(req_user['email'])

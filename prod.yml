@@ -1,0 +1,6 @@
+version: "3"
+services:
+  webui:
+    image: armhf/node
+  api:
+    image: armhf/python3.5

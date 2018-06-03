@@ -28,7 +28,7 @@ def login():
     password = request.form['password'].encode('utf-8')
     user = User.findby_email(str(usermail))
 
-    if not user:
+    if not user or 'password' not in user:
         return error_response('Invalid data.', 401)
     if user['password'] == sha256(password).hexdigest():
         token = jwt.encode({

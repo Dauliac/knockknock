@@ -4,19 +4,23 @@ import axios from 'axios';
 export default {
   state: {
     ringtones: [],
+    ringtonePending: []
   },
 
   getters: {
-    ringtones: state => state.ringtones
+    ringtones: state => state.ringtones,
+    ringtonePending: state => state.ringtonePending
   },
 
   mutations: {
     loadRingtones(state, ringtones) {
       state.ringtones = ringtones;
     },
-
     popRingtone(state, id) {
       state.ringtones = state.ringtones.filter(r => r.id !== id);
+    },
+    pendingRingtone(state, ringtone) {
+      state.ringtonePending = ringtone;
     }
   },
 
@@ -33,7 +37,6 @@ export default {
         throw new Error('Api down');
       }
     },
-
     async removeRingtone({ commit }, id) {
       try {
         const res = await axios.delete(`${config.url}ringtones/${id}`);
@@ -42,6 +45,30 @@ export default {
           return res.status;
         }
       } catch (e) {
+        throw new Error('Api down');
+      }
+    },
+    async updateRingtone({ commit, state }) {
+      const id = state.ringtonePending[0].id;
+      try {
+        const params = new URLSearchParams();
+        params.append('status', 'OPEN');
+        const res = await axios.put(`${config.url}ringtones/${id}`, params);
+        if (res.status === 200) {
+          commit('loadRingtones');
+        }
+      }
+      catch (e) {
+        throw new Error('Api down');
+      }
+    },
+    async getRingtonePending({ commit }) {
+      try {
+        const res = await axios.get(`${config.url}ringtones/pending`);
+        commit('pendingRingtone', res.data);
+        console.log(res.data)
+      }
+      catch (e) {
         throw new Error('Api down');
       }
     }

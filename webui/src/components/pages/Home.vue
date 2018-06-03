@@ -1,7 +1,8 @@
 <template>
   <section class="container">
-
     <h2>Welcome {{ user }}</h2>
+
+
   </section>
 </template>
 

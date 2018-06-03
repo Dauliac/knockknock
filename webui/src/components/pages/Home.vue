@@ -1,6 +1,23 @@
 <template>
   <section class="container">
     <h2>Welcome {{ user }}</h2>
+    <form>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com" v-model="user.mail">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" type="password" placeholder="password" v-model="user.password">
+        </div>
+      </div>
+      <div class="control">
+        <button class="button is-primary" @click="login(user)">Submit</button>
+      </div>
+    </form>
   </section>
 </template>
 
@@ -15,28 +32,22 @@ export default {
 
   data () {
     return {
-      user: 'Admin'
+      user: {
+        mail: "",
+        password: ""
+      }
     }
   },
-  created () {
-    axios.get('http://0.0.0.0:5000/api/users')
-      .then(response => {
-        console.log(response)
-      })
-      .catch(err => {
-        console.error(err)
-      })
-    const params = new URLSearchParams();
-    params.append('email', 'admin@example.com')
-    params.append('password', 'password')
+  computed: {
+    ...mapGetters([
+      'isAuthenticated'
+    ]),
+  },
 
-    axios.post('http://0.0.0.0:5000/api/login', params)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  methods: {
+    ...mapActions([
+      'login'
+    ]),
   }
 }
 </script>

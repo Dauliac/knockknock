@@ -6,6 +6,9 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex';
+import configApi from "../../config-api-route";
+import axios from 'axios';
+import qs from 'qs';
 
 Vue.use(Vuex);
 
@@ -20,18 +23,20 @@ export default () => {
       isAuthenticated: state => state.isAuthenticated,
       userMail: state => state.userMail,
       userToken: state => state.userToken,
-      socket: state => {
-        return io('http://0.0.0.0:5000')
-      },
     },
     mutations: {
 
     },
     actions: {
-      login ({ state }) {
-        state.isAuthenticated = !state.isAuthenticated;
-        state.userMail = user.mail;
-        state.userToken = user.token;
+      login ({ state }, user) {
+        // state.isAuthenticated = !state.isAuthenticated;
+        // state.userMail = user.mail;
+        // state.userToken = user.token;
+        axios.post(configApi.url + 'login', qs.stringify({user}))
+          .then( res => {
+            console.log(res)
+          })
+          .catch(err => console.log(err))
       },
       connected ({ state }, { userMail, userToken }) {
         state.userMail = userMail;

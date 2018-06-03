@@ -10,6 +10,8 @@ ADD . /usr/src
 COPY requirements.txt ./
 RUN apk update && apk add bash
 RUN pip install --no-cache-dir -r requirements.txt
+RUN ln -sf /usr/src/webui/static /usr/src
+RUN ln -sf /usr/src/webui/index.html /usr/src/templates
 # RUN rm -rfv /usr/src/webui/static
 # RUN rm -rfv /usr/src/webui/index.html
 

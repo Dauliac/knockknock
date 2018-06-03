@@ -10,8 +10,6 @@ services:
       - database
     ports:
       - 0.0.0.0:80:5000
-    networks:
-      - internal
   database:
     image: hypriot/rpi-mysql
     ports:
@@ -21,9 +19,3 @@ services:
       - MYSQL_DATABASE=knockknock
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=password
-
-volumes:
-  frontend:
-networks:
-  internal:
-    driver: bridge

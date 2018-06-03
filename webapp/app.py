@@ -11,6 +11,7 @@
 import os
 import sys
 import api
+from api.users import bp as users
 from flask import Flask, render_template, jsonify
 from database import get_models
 
@@ -20,6 +21,7 @@ def configure(app):
 
 app = Flask(__name__)
 app.register_blueprint(api.bp)
+app.register_blueprint(users)
 configure(app)
 
 with app.app_context():

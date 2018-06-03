@@ -17,7 +17,7 @@
               <footer class="card-footer">
                 <p class="card-footer-item">
                   <span>
-                    {{ statuts }}
+                    {{ ring.statuts }}
                   </span>
                 </p>
                 <p class="card-footer-item">

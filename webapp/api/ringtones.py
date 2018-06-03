@@ -45,7 +45,7 @@ def find_pending():
     Ringtone = get_model()
     ringtones = Ringtone.findall(False, "status = '{}'".format(PENDING))
     if not len(ringtones):
-        return error_response('No pending events.', 404)
+        return error_response('No pending events.', 201)
     return jsonify(ringtones)
 
 @bp.route('/<id>', methods=['GET'])

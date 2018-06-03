@@ -9,10 +9,16 @@ How to run the project:
 - docker
 
 ## API + Front in Production
-- with docker (recommended)
+- with docker-compose (recommended)
 ```
+# In dev
 docker-compose up -d --build
 docker-compose logs -f
+
+# In prodcution on the raspberry pi
+# Edit the file config.py
+docker-compose -f prod.yml up -d --build
+dokcer-compose logs -f
 ```
 
 ## API Dev + Front Dev

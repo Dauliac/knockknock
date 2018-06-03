@@ -48,14 +48,17 @@ export default {
         throw new Error('Api down');
       }
     },
-    async updateRingtone({ commit, state }) {
-      const id = state.ringtonePending[0].id;
+    async updateRingtone({ commit, state }, ringtone) {
       try {
         const params = new URLSearchParams();
-        params.append('status', 3);
-        const res = await axios.put(`${config.url}ringtones/${id}`, params);
+        params.append('status', ringtone.status);
+        const res = await axios.put(`${config.url}ringtones/${ringtone.id}`, params);
         if (res.status === 200) {
-          commit('loadRingtones');
+          state.ringtones.forEach(ring => {
+            if (ring.id === ringtone.id) {
+              ring.status = ringtone.status
+            }
+          });
         }
       }
       catch (e) {
@@ -63,14 +66,11 @@ export default {
       }
     },
     async getRingtonePending({ commit }) {
-      try {
-        const res = await axios.get(`${config.url}ringtones/pending`);
+      const res = await axios.get(`${config.url}ringtones/pending`);
+      if (res.status === 200) {
         commit('pendingRingtone', res.data);
-        console.log(res.data)
       }
-      catch (e) {
-        throw new Error('Api down');
-      }
+      return res.data;
     }
   }
 }

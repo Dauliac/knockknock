@@ -11,7 +11,7 @@
 import os
 import sys
 import api
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from database import get_models
 
 def configure(app):
@@ -25,15 +25,19 @@ configure(app)
 with app.app_context():
     try:
         models = get_models()
-        User = models['User']
-        User.flush()
-        User.create('admin@example.com', 'password')
     except Exception as e:
         sys.stderr.write("Cannot established connection to mysql server.\n")
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
+
+@app.route('/createtestadm', methods=['GET'])
+def createDefaultAdmin():
+    user = { 'email': 'admin@example.com', 'password': 'password' }
+    models = get_models()
+    models['User'].create(user['email'], user['password'])
+    return jsonify(user)
 
 app.run(debug=True, host="0.0.0.0")
 

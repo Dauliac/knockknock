@@ -26,10 +26,8 @@ def login():
         return error_response('Bad form.', '301')
     usermail = str(request.form['email'])
     password = request.form['password'].encode('utf-8')
-    print(usermail, password)
     user = User.findby_email(str(usermail))
 
-    print(user)
     if not user:
         return error_response('Invalid data.', 401)
     if user['password'] == sha256(password).hexdigest():

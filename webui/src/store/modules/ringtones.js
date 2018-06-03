@@ -52,7 +52,7 @@ export default {
       const id = state.ringtonePending[0].id;
       try {
         const params = new URLSearchParams();
-        params.append('status', 'OPEN');
+        params.append('status', 3);
         const res = await axios.put(`${config.url}ringtones/${id}`, params);
         if (res.status === 200) {
           commit('loadRingtones');

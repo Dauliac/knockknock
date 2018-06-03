@@ -10,7 +10,6 @@
         <div class="modal-background"></div>
         <div class="modal-content">
           <img :src="ringtonePending[0].replay_url">
-          {{ ringtonePending[0] }}
           <button class="button is-success" @click="updateRingtone">Open</button>
           <button class="button is-danger" @click="updateRingtone">Close</button>
         </div>

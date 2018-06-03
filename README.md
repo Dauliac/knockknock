@@ -11,17 +11,8 @@ How to run the project:
 ## API + Front in Production
 - with docker (recommended)
 ```
-# Clean
-./init remove
-
-# Build
-./init build
-
-# Run
-./init run
-
-# Clean & Build & Run
-./init up
+docker-compose up -d --build
+docker-compose logs -f
 ```
 
 ## API Dev + Front Dev
@@ -33,9 +24,9 @@ Go to http://localhost:8080
 npm install
 npm run dev
 ## ./api
-source $(./pyenv)
-pip install -r requirement.txt
-./main.py
+source $(./pyenv create)
+./pyenv export
+./app.py
 ```
 - DevAPI: http://localhost:5000/api
 - DevFront: http://localhost:8080
@@ -44,10 +35,9 @@ pip install -r requirement.txt
 - with docker
 ```
 # Start mariadb container
-./database/init.sh
-# Import tables
-mysql -h0.0.0.0 -uadmin -ppassword knockknock < database/users.sql
-mysql -h0.0.0.0 -uadmin -ppassword knockknock < database/events.sql
+cd database/
+docker build -t testdb . && docker run -it -p 3306:3306
+./create.sh
 
 # Connect to database
 mysql -h0.0.0.0 -uadmin -ppassword knockknock

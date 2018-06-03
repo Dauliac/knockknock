@@ -1,28 +1,32 @@
 <template>
-    <section class="container">
-      <div class="columns">
-        <div class="column is-one-third">
-          <div class="card">
-            <div class="card-content">
-              <p class="title">
-                ringtone
-              </p>
-              <p class="subtitle">
-                date
-              </p>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-one-third" v-for="ring in ringtones" :key="ring.id">
+            <div class="card">
+              <div class="card-content">
+                <p class="title">
+                  <a class="link" :href="ring.replay_url">
+                    {{ ring.id }}
+                  </a>
+                </p>
+                <p class="subtitle">
+                  {{ ring.timestamp }}
+                </p>
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <span>
+                    {{ statuts }}
+                  </span>
+                </p>
+                <p class="card-footer-item">
+                  <a class="button is-danger" @click="removeRingtone(ring.id)">
+                    Delete
+                  </a>
+                </p>
+              </footer>
             </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-                <span>
-                  REVIEW
-                </span>
-              </p>
-              <p class="card-footer-item">
-                <span>
-                  DELETE
-                </span>
-              </p>
-            </footer>
           </div>
         </div>
       </div>
@@ -30,12 +34,21 @@
 </template>
 
 <script>
-import { mapGetters,  } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: "Ringtones",
 
-  mounted() {
-    this.$store.dispatch('getRingtones');
+  async mounted() {
+    await this.getRingtones();
+  },
+
+  methods: {
+    ...mapActions([
+      'updateRingtone',
+      'removeRingtone',
+      'getRingtones'
+    ])
   },
 
   computed: {

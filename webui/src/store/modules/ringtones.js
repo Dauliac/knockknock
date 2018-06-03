@@ -13,6 +13,10 @@ export default {
   mutations: {
     loadRingtones(state, ringtones) {
       state.ringtones = ringtones;
+    },
+
+    popRingtone(state, id) {
+      state.ringtones = state.ringtones.filter(r => r.id !== id);
     }
   },
 
@@ -26,6 +30,18 @@ export default {
         }
       }
       catch (e) {
+        throw new Error('Api down');
+      }
+    },
+
+    async removeRingtone({ commit }, id) {
+      try {
+        const res = await axios.delete(`${config.url}ringtones/${id}`);
+        if (res.status === 200) {
+          commit('popRingtone', id);
+          return res.status;
+        }
+      } catch (e) {
         throw new Error('Api down');
       }
     }

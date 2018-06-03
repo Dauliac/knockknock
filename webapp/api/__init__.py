@@ -26,7 +26,7 @@ def login():
         return error_response('Bad form.', '301')
     usermail = str(request.form['email'])
     password = request.form['password'].encode('utf-8')
-    user = User.findby_email(str(usermail))
+    user = User.serialize(User.findby_email(str(usermail)))
 
     if not user or 'password' not in user:
         return error_response('Invalid data.', 401)

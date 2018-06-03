@@ -33,9 +33,9 @@ Go to http://localhost:8080
 npm install
 npm run dev
 ## ./api
-source $(./pyenv)
-pip install -r requirement.txt
-./main.py
+source $(./pyenv create)
+./pyenv export
+./app.py
 ```
 - DevAPI: http://localhost:5000/api
 - DevFront: http://localhost:8080
@@ -43,8 +43,6 @@ pip install -r requirement.txt
 ## Database
 - with docker
 ```
-# Start mariadb container
-./database/init.sh
 # Import tables
 mysql -h0.0.0.0 -uadmin -ppassword knockknock < database/users.sql
 mysql -h0.0.0.0 -uadmin -ppassword knockknock < database/events.sql

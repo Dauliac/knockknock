@@ -6,10 +6,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN ln -sfv $PWD/usr/src/webapp/webui/index.html /usr/src/webapp/templates
-RUN ln -sfv $PWD/usr/src/webapp/webui/static /usr/src/webap
-
 
 EXPOSE 5000
 
-CMD [ "python", "./app" ]
+CMD [ "python", "./app.py" ]

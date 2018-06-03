@@ -1,22 +1,15 @@
 version: "3"
 services:
-  # webui:
-  #   build: 
-  #     context: ./webui
-  #     dockerfile: Dockerfile-prod
-  #   volumes:
-  #     - frontend:/usr/src/webui/dist
   api:
     build: 
       context: ./webapp
       dockerfile: Dockerfile-prod
-    volumes:
-      - frontend:/usr/src/webapp/webui
     environment:
       - FLASK_ENV=production
+    volumes:
+      - 
     depends_on:
       - database
-      # - webui
     ports:
       - 0.0.0.0:80:5000
   database:

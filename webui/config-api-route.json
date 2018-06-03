@@ -1,3 +1,4 @@
 {
-  "url": "http://0.0.0.0:8080/api/"
+  "url": "http://localhost:5000/api/",
+  "tokenName": "_tkn"
 }

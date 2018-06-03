@@ -29,3 +29,6 @@ class Ringtone(Repository):
         querystring = "delete from {} where id = {}"
         return self.commit(querystring.format(self.table, id))
 
+    def update_status(self, id, status):
+        querystring = "update ringtones set status = '{}' where id = {}"
+        return self.commit(querystring.format(status, id))

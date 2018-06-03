@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/pages/Home'
-import Events from '@/components/pages/Events'
+import Ringtones from '@/components/pages/Ringtones'
 import Stream from '@/components/pages/Stream'
 import Options from '@/components/pages/Options'
 
@@ -15,9 +15,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/events',
-      name: 'Events',
-      component: Events
+      path: '/ringtones',
+      name: 'Ringtones',
+      component: Ringtones
     },
     {
       path: '/stream',

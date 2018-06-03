@@ -8,16 +8,23 @@ import Vue from 'vue'
 import Vuex from 'vuex';
 import configApi from "../../config-api-route";
 import axios from 'axios';
+import usersStore from './modules/users';
+import ringtonesStore from './modules/ringtones';
+import localstore from 'store';
 
 Vue.use(Vuex);
 
 export default () => {
   return new Vuex.Store({
+    modules: {
+      usersStore,
+      ringtonesStore
+    },
     state: {
       isAuthenticated: false,
       userMail: '',
       userToken: '',
-      errors: []
+      errors: [],
     },
     getters: {
       isAuthenticated: state => state.isAuthenticated,
@@ -25,23 +32,33 @@ export default () => {
       userToken: state => state.userToken,
     },
     mutations: {
-      TOKEN_CHANGED(state, payload) {
-        state.userToken = payload;
+      TOKEN_CHANGED(state, token) {
+        state.userToken = token;
         state.isAuthenticated = true;
       }
     },
     actions: {
+      async checkAuth ({ commit, state }) {
+        try {
+          const token = localstore.get(configApi.tokenName);
+          if (token) {
+            commit('TOKEN_CHANGED', token);
+          }
+        } catch (e) {
+          throw new Error('Unauthenticated.');
+        }
+      },
       login ({ commit, state }, user) {
-        // state.isAuthenticated = !state.isAuthenticated;
-        // state.userMail = user.mail;
-        // state.userToken = user.token;
         const params = new URLSearchParams();
+
         params.append('email', user.mail);
         params.append('password', user.password);
+
         axios.post(configApi.url + 'login', params)
           .then( res => {
             console.log(res);
             state.userMail = user.mail;
+            localstore.set(configApi.tokenName, res.data.token);
             commit('TOKEN_CHANGED', res.data.token);
           })
           .catch(err => {
@@ -50,10 +67,11 @@ export default () => {
             console.log(state.errors)
           })
       },
-      // connected ({ state }, { userMail, userToken }) {
-      //   state.userMail = userMail;
-      //   state.userToken = userToken;
-      // }
+      deleteUser(user) {
+        axios.delete(configApi.url + `users/${user.id}`)
+          .then(res => console.log(res))
+          .catch(err => console.error(err))
+      }
     }
   });
 }

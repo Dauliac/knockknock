@@ -1,16 +1,19 @@
 version: "3"
 services:
+  webui:
+    build: ./webui
+    volumes:
+      - frontbuild:/webui/dist
   api:
     build: ./webapp
     ports:
       - 8080:5000
     volumes:
-      - $PWD/webui/dist:/usr/src/webui
+      - frontbuild:/usr/src/webui
     command: ['./wait-for-it.sh', 'database:3306', '--', 'python', 'app.py']
     depends_on:
       - database
-  webui:
-    build: ./webui
+      - webui
   database:
     image: mariadb
     environment:
@@ -20,3 +23,6 @@ services:
       - MYSQL_PASSWORD=password
     ports:
       - 3306:3306
+
+volumes:
+  frontbuild:

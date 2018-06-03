@@ -5,3 +5,11 @@ CREATE TABLE IF NOT EXISTS ringtones (
   timestamp DATETIME,
   PRIMARY KEY (id)
 );
+
+INSERT INTO ringtones(status, replay_url, timestamp) VALUES(1, '0.0.0.0:8080/stream', NOW());
+INSERT INTO ringtones(status, replay_url, timestamp) VALUES(2, '0.0.0.0:8080/stream', NOW());
+INSERT INTO ringtones(status, replay_url, timestamp) VALUES(1, '0.0.0.0:8080/stream', NOW());
+INSERT INTO ringtones(status, replay_url, timestamp) VALUES(1, '0.0.0.0:8080/stream', NOW());
+INSERT INTO ringtones(status, replay_url, timestamp) VALUES(3, '0.0.0.0:8080/stream', NOW());
+INSERT INTO ringtones(status, replay_url, timestamp) VALUES(1, '0.0.0.0:8080/stream', NOW());
+

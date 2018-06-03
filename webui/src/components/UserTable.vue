@@ -39,8 +39,10 @@ export default {
       this.$emit('delete', user);
     },
     updateUser(user) {
-      this.$emit('update', user);
-    }
+      this.$emit('update');
+      this.$store.commit('changeId', user)
+    },
+
   }
 }
 </script>

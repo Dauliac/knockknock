@@ -66,8 +66,8 @@ export default {
           path: 'Options'
         },
         {
-          title: 'Events historic',
-          path: 'Events'
+          title: 'Ringtones history',
+          path: 'Ringtones'
         }
       ]
     }

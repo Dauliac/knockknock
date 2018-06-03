@@ -22,7 +22,7 @@ def configure(app):
     app.config.from_object('config')
     os.environ['FLASK_ENV'] = 'production'
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='webui/static', template_folder='webui')
 cors = CORS(app, ressources={r"/api/*": {"origins": "*"}})
 CORS(app)
 app.register_blueprint(api.bp)

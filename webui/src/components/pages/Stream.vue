@@ -1,19 +1,18 @@
 <template>
-    <div>
-      <div>
-        <img src="http://0.0.0.0:8080/stream?width=670&height=480" alt="">
-        {{ stream }}
-      </div>
-    </div>
+  <section>
+    <img :src="streamUrl">
+    <loader></loader>
+  </section>
 </template>
 
 <script>
+import Loader from "../Loader";
 export default {
   name: "Stream",
-
+  components: {Loader},
   data() {
     return {
-      stream: 'streamurl'
+      streamUrl: '127.0.0.1:8080/stream'
     }
   }
 }

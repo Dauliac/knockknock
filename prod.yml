@@ -1,0 +1,26 @@
+version: "3"
+services:
+  api:
+    build: 
+      context: ./webapp
+      dockerfile: Dockerfile-prod
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      - 
+    depends_on:
+      - database
+    ports:
+      - 0.0.0.0:80:5000
+  database:
+    image: hypriot/rpi-mysql
+    ports:
+      - 127.0.0.1:3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=knockknock
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
+
+volumes:
+  frontend:

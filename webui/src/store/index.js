@@ -9,6 +9,7 @@ import Vuex from 'vuex';
 import configApi from "../../config-api-route";
 import axios from 'axios';
 import usersStore from './modules/users';
+import ringtonesStore from './modules/ringtones';
 import localstore from 'store';
 
 Vue.use(Vuex);
@@ -16,7 +17,8 @@ Vue.use(Vuex);
 export default () => {
   return new Vuex.Store({
     modules: {
-      usersStore
+      usersStore,
+      ringtonesStore
     },
     state: {
       isAuthenticated: false,

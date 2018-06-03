@@ -11,7 +11,7 @@ from database.models.Repository import Repository
 class Ringtone(Repository):
     def __init__(self):
         Repository.__init__(self)
-        self.table = 'users'
+        self.table = 'ringtones'
         self.keys = [
                 'id', 
                 'status', 
@@ -24,23 +24,6 @@ class Ringtone(Repository):
 
     def findby_id(self, id):
         return self.find("id = '{}'".format(id))
-
-    def create(self, email, password):
-        return
-
-    def update(self, ringtone):
-        # req_user = self.serialize(self.findby_id(user['id']))
-        # querystring = "update users set"
-        # values = []
-        # for key in self.keys[1:]:
-        #     if key in user and req_user[key] != user[key]:
-        #         values.append(" {} = '{}'".format(key, user[key]))
-        # querystring += ((',').join(tuple(values)))
-        # querystring += " where id = {}".format(user['id'])
-        # if len(values) > 0:
-        #     self.commit(querystring)
-        # return self.serialize(self.findby_id(user['id']), True)
-        return ringtone
 
     def remove(self, id):
         querystring = "delete from {} where id = {}"

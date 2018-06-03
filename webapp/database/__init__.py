@@ -11,10 +11,11 @@ import os
 import mysql.connector
 from flask import g, current_app as app
 from .models.User import User
+from .models.Ringtone import Ringtone
 
 def get_models():
     models = {}
     models['User'] = User()
-    # models['Ringtones']
+    models['Ringtone'] = Ringtone()
 
     return models

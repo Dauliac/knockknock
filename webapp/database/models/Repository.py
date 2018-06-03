@@ -42,8 +42,11 @@ class Repository:
                 obj[key] = row[i]
         return obj
 
-    def findall(self, filter=False):
-        results = self.results("select * from {}".format(self.table))
+    def findall(self, filter=False, condition=''):
+        querystring = "select * from {}".format(self.table)
+        if condition:
+            querystring += ' where {}'.format(condition)
+        results = self.results(querystring)
         collection = []
         for item in results:
             collection.append(self.serialize(item, filter))

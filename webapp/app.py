@@ -12,6 +12,7 @@ import os
 import sys
 import api
 from api.users import bp as users
+from api.ringtones import bp as ringtones
 from flask import Flask, render_template, jsonify
 from flask_cors import CORS
 from database import get_models
@@ -26,6 +27,7 @@ cors = CORS(app, ressources={r"/api/*": {"origins": "*"}})
 CORS(app)
 app.register_blueprint(api.bp)
 app.register_blueprint(users)
+app.register_blueprint(ringtones)
 configure(app)
 
 with app.app_context():

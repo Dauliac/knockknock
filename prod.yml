@@ -6,12 +6,11 @@ services:
       dockerfile: Dockerfile-prod
     environment:
       - FLASK_ENV=production
-    volumes:
-      - 
     depends_on:
       - database
     ports:
       - 0.0.0.0:80:5000
+      - 8080:8080
   database:
     image: hypriot/rpi-mysql
     ports:

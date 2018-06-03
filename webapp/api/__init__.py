@@ -22,18 +22,21 @@ def login():
     models = get_models()
     User = models.get('User')
 
+    if 'email' not in request.form or 'password' not in request.form:
+        return error_response('Bad form.', '301')
     usermail = str(request.form['email'])
     password = request.form['password'].encode('utf-8')
-    user = User.findby_email(usermail)
+    print(usermail, password)
+    user = User.findby_email(str(usermail))
 
+    print(user)
     if not user:
-        return error_response('Wrong credentials', 401)
+        return error_response('Invalid data.', 401)
     if user['password'] == sha256(password).hexdigest():
         token = jwt.encode({
             'email': user['email'],
             }, 'secret', algorithm='HS256')
         user['last_login'] = time.strftime('%Y-%m-%d %H:%M:%S')
-        print(User.update(user))
         return jsonify({ 'token': str(token.decode('utf-8')) })
     return error_response('Wrong credentials', 401)
 

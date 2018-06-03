@@ -1,43 +1,14 @@
 <template>
   <section class="container">
     <h2>Welcome {{ user }}</h2>
-    <button @click="login(user)">click</button>
-
-<<<<<<< HEAD
-    <button @click="clickButton(1)">Socket emit</button>
-
-    <div class="buttons has-addons is-boxed">
-      <span class="button is-success is-selected is-rounded">Accept rington</span>
-      <span class="button is-danger is-rounded">Decline ringtion</span>
-    </div>
-
-
-
-    <div class="card">
-      <div class="card-content">
-        <p class="title">
-          Appel en cours ...
-        </p>
-      </div>
-      <footer class="card-footer">
-        <p class="card-footer-item">
-          <span class="button is-success">Accept rington</span>
-        </p>
-        <p class="card-footer-item">
-      <span>
-        Share on <a href="#">Facebook</a>
-      </span>
-        </p>
-      </footer>
-    </div>
-=======
-    <button @click="simulateCall">Simulate Call</button>
->>>>>>> 31f367dc49e666058bc8babdc5042e12a02b9a0b
   </section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import axios from 'axios';
+
+axios.defaults.headers['Content-type'] =  'application/x-www-form-urlencoded'
 
 export default {
   name: 'Home',
@@ -47,22 +18,25 @@ export default {
       user: 'Admin'
     }
   },
-  
-  computed: {
-    ...mapGetters([
-      'isAuthenticated'
-    ]),
-  },
+  created () {
+    axios.get('http://0.0.0.0:5000/api/users')
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    const params = new URLSearchParams();
+    params.append('email', 'admin@example.com')
+    params.append('password', 'password')
 
-  methods: {
-    ...mapActions([
-      'login'
-    ]),
-
-    simulateCall () {
-      const socket = this.$store.getters.socket;
-      socket.emit('message', 'ping');
-    }
+    axios.post('http://0.0.0.0:5000/api/login', params)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 </script>

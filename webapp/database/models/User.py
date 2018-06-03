@@ -12,6 +12,7 @@ from database.models.Repository import Repository
 class User(Repository):
     def __init__(self):
         Repository.__init__(self)
+        self.table = 'users'
         self.keys = [
                 'id', 
                 'email', 
@@ -27,37 +28,14 @@ class User(Repository):
                 'admin_level'
                 ]
 
-    def serializeList(self, users, filters=[]):
-        serialized_users = []
-        for user in users:
-            serialized_users.append(self.serialize(user, filters))
-        return serialized_users
-
-    def serialize(self, user, filter=False, filters=[]):
-        if filter == True:
-            filters = self.private
-        dict_user = {}
-        index = 0
-        for key in self.keys:
-            if user[index] and not (filter and key in filters):
-                dict_user[key] = user[index]
-            elif not key in filters:
-                dict_user[key] = ''
-            index += 1
-        return dict_user
-
     def flush(self):
         return self.commit('truncate users')
 
-    def findall(self, filters=[]):
-        return self.serializeList(self.results('select * from users'), filters)
+    def findby_id(self, id, filter=False):
+        return self.find("id = '{}'".format(id), filter)
 
-    def findby_id(self, id):
-        return self.findone("select * from users where id = '{}'".format(id))
-
-    def findby_email(self, email):
-        user = self.findone("select * from users where email = '{}'".format(email))
-        return self.serialize(user)
+    def findby_email(self, email, filter=False):
+        return self.find("email = '{}'".format(email), filter)
 
     def create(self, email, password):
         password = sha256(password.encode('utf-8')).hexdigest()

@@ -13,6 +13,7 @@ import sys
 import api
 from api.users import bp as users
 from flask import Flask, render_template, jsonify
+from flask_cors import CORS
 from database import get_models
 
 def configure(app):
@@ -20,6 +21,7 @@ def configure(app):
     os.environ['FLASK_ENV'] = 'production'
 
 app = Flask(__name__)
+cors = CORS(app, ressources={r"/api/*": {"origins": "*"}})
 app.register_blueprint(api.bp)
 app.register_blueprint(users)
 configure(app)

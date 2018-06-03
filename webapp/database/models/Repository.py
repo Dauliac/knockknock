@@ -14,6 +14,9 @@ class Repository:
     def __init__(self):
         self.client = self.get_db()
         self.cursor = self.client.cursor()
+        self.private = []
+        self.keys = ['id']
+        self.table = ''
 
     def get_db(self):
         if 'mysql_client' not in g:
@@ -29,11 +32,34 @@ class Repository:
         if not self.cursor:
             self.cursor = self.client.cursor()
 
+    def serialize(self, row, filter=False):
+        if not row:
+            return None
+        obj = {}
+        for i in range(len(self.keys)):
+            key = self.keys[i]
+            if not filter or filter and (key not in self.private):
+                obj[key] = row[i]
+            else:
+                obj[key] = ''
+        return obj
+
+    def findall(self, filter=False):
+        results = self.results("select * from {}".format(self.table))
+        collection = []
+        for item in results:
+            collection.append(self.serialize(item, filter))
+        return collection
+    
+    def find(self, condition, filter=False):
+        item = self.findone("select * from {} where {}".format(self.table, condition))
+        return self.serialize(item, filter)
+
     def findone(self, querystring):
         self.init_cursor()
         self.cursor.execute(querystring)
         results = self.cursor.fetchall()
-        if len(results) == 1:
+        if len(results) > 0:
             return results[0]
         return None
  

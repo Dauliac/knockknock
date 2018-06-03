@@ -13,12 +13,14 @@ import sys
 import api
 from flask import Flask, render_template, jsonify
 from database import get_models
+from flask_cors import CORS, cross_origin
 
 def configure(app):
     app.config.from_object('config')
     os.environ['FLASK_ENV'] = 'production'
 
 app = Flask(__name__)
+CORS(app)
 app.register_blueprint(api.bp)
 configure(app)
 

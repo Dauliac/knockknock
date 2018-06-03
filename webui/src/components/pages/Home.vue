@@ -1,38 +1,24 @@
 <template>
   <section class="container">
-    <h2>Welcome {{ user }}</h2>
-    <button @click="login(user)">click</button>
 
-<<<<<<< HEAD
-    <button @click="clickButton(1)">Socket emit</button>
-
-    <div class="buttons has-addons is-boxed">
-      <span class="button is-success is-selected is-rounded">Accept rington</span>
-      <span class="button is-danger is-rounded">Decline ringtion</span>
-    </div>
-
-
-
-    <div class="card">
-      <div class="card-content">
-        <p class="title">
-          Appel en cours ...
-        </p>
+    <form>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com" v-model="user.mail">
+        </div>
       </div>
-      <footer class="card-footer">
-        <p class="card-footer-item">
-          <span class="button is-success">Accept rington</span>
-        </p>
-        <p class="card-footer-item">
-      <span>
-        Share on <a href="#">Facebook</a>
-      </span>
-        </p>
-      </footer>
-    </div>
-=======
-    <button @click="simulateCall">Simulate Call</button>
->>>>>>> 31f367dc49e666058bc8babdc5042e12a02b9a0b
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" type="password" placeholder="password" v-model="user.password">
+        </div>
+      </div>
+      <div class="control">
+        <button class="button is-primary" @click="login(user)">Submit</button>
+      </div>
+    </form>
+
   </section>
 </template>
 
@@ -44,10 +30,13 @@ export default {
 
   data () {
     return {
-      user: 'Admin'
+      user: {
+        mail: "",
+        password: ""
+      }
     }
   },
-  
+
   computed: {
     ...mapGetters([
       'isAuthenticated'
@@ -58,11 +47,6 @@ export default {
     ...mapActions([
       'login'
     ]),
-
-    simulateCall () {
-      const socket = this.$store.getters.socket;
-      socket.emit('message', 'ping');
-    }
   }
 }
 </script>

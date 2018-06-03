@@ -4,6 +4,7 @@ import Home from '@/components/pages/Home'
 import Events from '@/components/pages/Events'
 import Stream from '@/components/pages/Stream'
 import Options from '@/components/pages/Options'
+import Users from '@/components/pages/Users'
 
 Vue.use(Router);
 
@@ -29,5 +30,10 @@ export default new Router({
       name: 'Options',
       component: Options
     },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users
+    }
   ]
 })

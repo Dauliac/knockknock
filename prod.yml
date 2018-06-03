@@ -10,7 +10,8 @@ services:
       - database
     ports:
       - 0.0.0.0:80:5000
-      - 8080:8080
+    networks:
+      - internal
   database:
     image: hypriot/rpi-mysql
     ports:
@@ -23,3 +24,6 @@ services:
 
 volumes:
   frontend:
+networks:
+  internal:
+    driver: bridge

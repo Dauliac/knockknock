@@ -68,10 +68,6 @@ export default {
         {
           title: 'Events historic',
           path: 'Events'
-        },
-        {
-          title: 'User List',
-          path: 'Users'
         }
       ]
     }

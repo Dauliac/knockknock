@@ -4,6 +4,8 @@ services:
     build: ./webui
     volumes:
       - frontbuild:/webui/dist
+    networks:
+        - knockknock
   api:
     build: ./webapp
     ports:
@@ -14,6 +16,8 @@ services:
     depends_on:
       - database
       - webui
+    networks:
+        - knockknock
   database:
     image: mariadb
     environment:
@@ -23,6 +27,12 @@ services:
       - MYSQL_PASSWORD=password
     ports:
       - 3306:3306
+    networks:
+        - knockknock
 
 volumes:
   frontbuild:
+networks:
+    knockknock:
+        driver: bridge
+    

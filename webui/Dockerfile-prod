@@ -1,4 +1,8 @@
-FROM armhf/node:10.0.0
+FROM armhf/node
+
+WORKDIR /usr/src/webui
+
+ADD . .
 
 RUN npm install \
   && npm run build

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255),
   auth_token VARCHAR(255),
   admin_level INTEGER,
-  last_login DATE,
+  last_login DATETIME,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 );

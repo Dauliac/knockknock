@@ -30,7 +30,6 @@ with app.app_context():
         User.create('admin@example.com', 'password')
     except Exception as e:
         sys.stderr.write("Cannot established connection to mysql server.\n")
-        exit(0)
 
 @app.route('/', methods=['GET'])
 def index():

@@ -31,6 +31,15 @@ def find_all():
 
     return jsonify(ringtones)
 
+@bp.route('/<id>', methods=['PUT'])
+def update_pending(id):
+    Ringtone = get_model()
+    ringtone = Ringtone.serialize(Ringtone.findby_id(id))
+    if ringtone and 'status' in ringtone and ringtone.get('status') == 1:
+        Ringtone.update_status(id, int(request.form['status']))
+        return jsonify({ 'status': 'Success' })
+    return error_response('Error on update', 400)
+
 @bp.route('/pending', methods=['GET'])
 def find_pending():
     Ringtone = get_model()
